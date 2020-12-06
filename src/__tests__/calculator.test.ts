@@ -25,3 +25,24 @@ let dataset = [
 ];
 
 describe("Calculator", () => {});
+  dataset.forEach((calcul) => {
+    test(`the ${calcul.method} method with ${calcul.x} and ${calcul.y}`, () => {
+      switch (calcul.method) {
+        case "add":
+          expect(calculator.add(calcul.x, calcul.y)).toEqual(calcul.x + calcul.y);
+          break;
+        case "subtract":
+          expect(calculator.subtract(calcul.x, calcul.y)).toEqual(calcul.x - calcul.y);
+          break;
+        case "multiply":
+          expect(calculator.multiply(calcul.x, calcul.y)).toEqual(calcul.x * calcul.y);
+          break;
+        case "divide":
+          expect(calculator.divide(calcul.x, calcul.y)).toEqual(calcul.x / calcul.y);
+          break;
+        default:
+          console.log("there is no matching calculation type");
+      }
+    });
+  });
+  
