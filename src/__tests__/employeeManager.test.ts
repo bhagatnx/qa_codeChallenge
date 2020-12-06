@@ -40,7 +40,7 @@ describe("Employee Manager", () => {
     });
   it("can add one more employee", async () => {
     await em.addEmployee();
-    await em.selectEmployeeByName("Add Employee");
+    await em.selectEmployeeByName("New Employee");
     await em.editEmployee({
       name: "Donald Trump",
       phone: "8009007890",
@@ -56,7 +56,7 @@ describe("Employee Manager", () => {
     });
   it("cancelling an edit of an employee", async () => {
     await em.selectEmployeeByName("Bernice Ortiz");
-    await em.editEmployee({ title: "player"});
+    await em.editEmployee({ title: "Player"});
     await em.cancelChanges();
     await em.selectEmployeeByName("Dollie Berry");
     await em.selectEmployeeByName("Bernice Ortiz");
@@ -81,5 +81,33 @@ describe("Employee Manager", () => {
       title: "CEO",
       });
     });
+  it("going over character requirement for 'name' shows error red line for title", async () => {
+    await em.selectEmployeeByName("Bernice Ortiz");
+    await em.editEmployee({ name: "Bernicebernicebernicebernicebernice"});
+    await em.saveChanges();
+    await em.getErrorMessage;
+    let employee = await em.getEmployeeInfo();
+    expect(employee).toEqual({
+      id: 1,
+      name: "Bernicebernicebernicebernicebernice",
+      phone: "4824931093",
+      title: "CEO",
+    });
+  });
+  it("going over character requirement for 'name' shows error red line, able to click on different name shows red line", async () => {
+    await em.selectEmployeeByName("Bernice Ortiz");
+    await em.editEmployee({ name: "Bernicebernicebernicebernicebernice"});
+    await em.saveChanges();
+    await em.getErrorMessage;
+    await em.selectEmployeeByName("Dollie Berry");
+    let employee = await em.getEmployeeInfo();
+    expect(employee).toEqual({
+      id: 5,
+      name: "Dollie Berry",
+      phone: "4873459812",
+      title: "Front-End Developer",
+    });
   });
 });
+})
+
