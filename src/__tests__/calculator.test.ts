@@ -23,7 +23,7 @@ let dataset = [
   { x: 81, y: 227, method: "multiply" },
   { x: 81, y: 227, method: "divide" },
 ];
-
+/*switch case testing*/
 describe("Calculator", () => {});
   dataset.forEach((calcul) => {
     test(`the ${calcul.method} method with ${calcul.x} and ${calcul.y}`, () => {
@@ -44,5 +44,22 @@ describe("Calculator", () => {});
           console.log("there is no matching calculation type");
       }
     });
+    //another switch method test
+      switch (calcul.method) {
+        case "add":
+          expect(calculator.add(calcul.x,calcul.y)).toBe(calcul.x + calcul.y);
+          break;
+        case "subtract":
+          expect(calculator.subtract(calcul.x,calcul.y)).toBe(calcul.x - calcul.y);
+          break;
+        case "multiply":
+          expect(calculator.multiply(calcul.x,calcul.y)).toBe(calcul.x * calcul.y);
+          break;
+        case "divide":
+            expect(calculator.divide(calcul.x,calcul.y)).toBe(calcul.x / calcul.y);
+            break;  
+              default:
+                  null;
+      }
   });
   
