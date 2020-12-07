@@ -82,6 +82,7 @@ describe("Employee Manager", () => {
         title: "CEO",
         });
       });
+    /*two new test added for bugs that were found - red line*/
     it("going over character requirement for 'name' shows error red line for title", async () => {
       await em.selectEmployeeByName("Bernice Ortiz");
       await em.editEmployee({ name: "Bernicebernicebernicebernicebernice"});
